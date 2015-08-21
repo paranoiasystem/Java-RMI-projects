@@ -1,0 +1,5 @@
+package com.marcoferraioli.server;
+
+public class ServerImpl {
+
+}

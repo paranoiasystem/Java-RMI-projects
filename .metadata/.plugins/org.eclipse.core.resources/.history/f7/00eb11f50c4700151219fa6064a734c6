@@ -1,0 +1,19 @@
+package com.marcoferraioli.server;
+
+import java.rmi.RMISecurityManager;
+
+public class ServerMain {
+	
+	static ServerImpl server;
+		
+	public static void main(String[] args) {
+		System.setSecurityManager(new RMISecurityManager());
+		try {
+			this.server = new ServerImpl();
+		} catch(Exception e) {
+			
+		}
+
+	}
+
+}

@@ -1,0 +1,35 @@
+package com.marcoferraioli.server;
+
+
+import java.rmi.server.*;
+import java.rmi.RemoteException;
+import java.util.logging.Logger;
+
+public class ServerImpl extends UnicastRemoteObject implements Server {
+	
+	static final serialVersionUID = 1L;
+	
+	protected ServerImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void dici(String username, String messsage) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void iscrivi(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void abbandona(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

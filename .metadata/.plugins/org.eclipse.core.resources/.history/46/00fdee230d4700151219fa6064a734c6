@@ -1,0 +1,22 @@
+package com.marcoferraioli.server;
+
+import java.rmi.RMISecurityManager;
+import java.rmi.server.*;
+import java.rmi.RemoteException;
+
+public class ServerMain {
+	
+	static ServerImpl server;
+		
+	public static void main(String[] args) {
+		System.setSecurityManager(new RMISecurityManager());
+		try {
+			server = new ServerImpl();
+			server.rebind("Chat", server);
+		} catch(Exception e) {
+			
+		}
+
+	}
+
+}

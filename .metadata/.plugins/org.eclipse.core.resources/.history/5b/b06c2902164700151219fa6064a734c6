@@ -1,0 +1,18 @@
+package com.marcoferraioli.server;
+
+import java.rmi.RemoteException;
+
+public class ServerMain {
+	
+	static ServerImpl server;
+	
+	public static void main(String[] args) {
+		try {
+			server = new ServerImpl();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
