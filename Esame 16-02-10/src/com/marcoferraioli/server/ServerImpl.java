@@ -98,17 +98,30 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 	@Override
 	public void abbandono(Client id, String username) throws RemoteException {
 		logger.info("\nAbbandona il comizio: " + username);
-		clientList.remove(id);
-		for (Iscritto iscritto : clientList)
-			iscritto.getId().abbandonato(username);
+		for (Iscritto iscritto : clientList){
+			if(iscritto.getUsername().equals(username) && iscritto.getId().equals(id))
+				clientList.remove(iscritto);
+			else 
+				iscritto.getId().abbandonato(username);
+		}
 	}
 
 	@Override
 	public void dicoprivato(String destinatario, String username, String message) throws RemoteException {
-		logger.info("\nmessaggio privato da " + username + " a " + destinatario);
-		for (Iscritto iscritto : clientList) {
-			if (iscritto.getUsername().equals(destinatario)) {
-				iscritto.getId().detto(username + "(privato)", message);
+		if(parla != null) {
+			logger.info("\nmessaggio privato da " + username + " a " + destinatario);
+			for (Iscritto iscritto : clientList) {
+				if (iscritto.getUsername().equals(destinatario)) {
+					iscritto.getId().detto(username + "(privato)", message);
+				}
+			}
+		}
+		else{
+			logger.info("\ntentativo di messaggio privato fuori dalla modalità comizio da " + username + " a " + destinatario);
+			for (Iscritto iscritto : clientList) {
+				if (iscritto.getUsername().equals(username)) {
+					iscritto.getId().detto("server", "Non puoi usare i messaggi privari al di fuori della modalità comizio");
+				}
 			}
 		}
 	}
