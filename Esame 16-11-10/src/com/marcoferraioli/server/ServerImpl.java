@@ -100,7 +100,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 	}
 
 	@Override
-	public synchronized void iscrivo(Client id, String username) throws RemoteException {
+	public synchronized boolean iscrivo(Client id, String username) throws RemoteException {
 		logger.info(username + " si è iscritto");
 		boolean value = true;
 		for (Iscritto iscritto : clientList) {
@@ -116,8 +116,10 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 			for (Iscritto iscritto : clientList) {
 				iscritto.id.iscritto(username);
 			}
+			return true;
 		} else {
 			id.notifica("Username già occupato");
+			return false;
 		}
 		
 	}

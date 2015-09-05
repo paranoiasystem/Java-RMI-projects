@@ -27,17 +27,21 @@ public class ClientImpl extends UnicastRemoteObject implements Client {
 		Server server = null;
 		Client myself = null;
 		
+		boolean value = false;
+		while(!value){
 		System.out.print("Inserisci l'username: ");
 		username = scanner.nextLine();
-		try {
-			server = (Server) Naming.lookup("rmi://localhost/chat");
-			myself = new ClientImpl();
-			server.iscrivo(myself, username);
-		} catch (Exception e) {
-			logger.severe("Non trovo il server o non riesco ad iscrivermi.");
-			e.printStackTrace();
-			System.exit(1);
+			try {
+				server = (Server) Naming.lookup("rmi://localhost/chat");
+				myself = new ClientImpl();
+				value = server.iscrivo(myself, username);
+			} catch (Exception e) {
+				logger.severe("Non trovo il server o non riesco ad iscrivermi.");
+				e.printStackTrace();
+				System.exit(1);
+			}
 		}
+		
 		while(true){
 			try {
 				cmd = scanner.nextLine();
