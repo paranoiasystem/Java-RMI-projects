@@ -1,5 +1,6 @@
 package com.marcoferraioli.server;
 
+import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 	}
 	
 	public static void main(String[] args) {
+		System.setSecurityManager(new RMISecurityManager());
 		try {
 			ServerImpl server = new ServerImpl();
 			java.rmi.Naming.rebind("facebook", server);
